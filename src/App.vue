@@ -1,10 +1,9 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import axios from 'axios'
 </script>
 
 <template>
-  <h1 class="text-4xl font-bold underline">
-    Hello world!
-  </h1>
+<button class="btn w-64 rounded-full">Button</button>
 </template>
 
