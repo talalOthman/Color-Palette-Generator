@@ -2,6 +2,12 @@
 
 The Color Palette Generator is a web application that generates a set of five color palettes using the Colormind API. Users can generate new palettes by clicking a button or pressing the spacebar key, and they can copy the hexadecimal values of individual colors by clicking on a card displaying that color. The application uses Vue.js, Tailwind CSS, and DaisyUI for the front-end, and Axios for API requests.
 
+## Desktop View
+![My Image](images/Desktop.jpg)
+
+## Mobile View
+![My Image](images/Mobile.jpg)
+
 ## How to Use
 
 1. Initially, the page will show a loading spinner. Wait for a few moments for the page to finish loading.
