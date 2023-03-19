@@ -2,7 +2,7 @@
 import ColorCard from './components/ColorCard.vue'
 import Message from './components/Message.vue'
 import Alert from './components/Alert.vue'
-import { onMounted, computed, ref } from 'vue'
+import { onMounted, computed, ref, watchEffect } from 'vue'
 import axios from 'axios'
 import Spinner from './components/Spinner.vue'
 
@@ -12,10 +12,23 @@ const colors = ref([])
 const isLoading = ref(true)
 const hexColors = computed(() => colors.value.map(color => rgbToHex(...color)))
 
-
 onMounted(() => {
   onGenerate()
   isLoading.value = true
+})
+
+watchEffect(() => {
+  document.addEventListener('keydown', (e) => {
+    if (e.code === 'Space') {
+      onGenerate()
+    }
+  })
+  document.addEventListener('keydown', (e) => {
+    if (e.code === 'KeyC') {
+      navigator.clipboard.writeText(hexColors.value.join(' '))
+      alertUser()
+    }
+  })
 })
 
 const onGenerate = async () => {
@@ -54,13 +67,13 @@ const alertUser = () => {
     <h1 class="cursor-default font-bold text-3xl md:text-5xl">Color Pallete Generator</h1>
     <div class="flex flex-col justify-center items-center gap-y-4 md:flex-row md:gap-x-3">
       <div class="flex gap-x-3">
-        <ColorCard @alert-event="alertUser" :color="hexColors[0].toUpperCase()"/>
-        <ColorCard @alert-event="alertUser" :color="hexColors[1].toUpperCase()"/>
-        <ColorCard @alert-event="alertUser" :color="hexColors[2].toUpperCase()"/>
+        <ColorCard @alert-event="alertUser" :color="hexColors[0].toUpperCase()" />
+        <ColorCard @alert-event="alertUser" :color="hexColors[1].toUpperCase()" />
+        <ColorCard @alert-event="alertUser" :color="hexColors[2].toUpperCase()" />
       </div>
       <div class="flex gap-x-3">
-        <ColorCard @alert-event="alertUser" :color="hexColors[3].toUpperCase()"/>
-        <ColorCard @alert-event="alertUser" :color="hexColors[4].toUpperCase()"/>
+        <ColorCard @alert-event="alertUser" :color="hexColors[3].toUpperCase()" />
+        <ColorCard @alert-event="alertUser" :color="hexColors[4].toUpperCase()" />
       </div>
     </div>
     <div class="flex flex-col items-center gap-y-3">
