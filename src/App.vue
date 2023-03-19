@@ -27,8 +27,11 @@ watchEffect(() => {
   document.addEventListener('keydown', (e) => {
     if (e.code === 'KeyC') {
       alertMessage.value = 'Complete pallete copied to clipboard!'
+      isAlert.value = true
       navigator.clipboard.writeText(hexColors.value.join(' '))
-      alertUser()
+      setTimeout(() => {
+        isAlert.value = false
+      }, 1000)
     }
   })
 })
