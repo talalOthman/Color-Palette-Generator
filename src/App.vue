@@ -11,6 +11,7 @@ const isAlert = ref(false)
 const colors = ref([])
 const isLoading = ref(true)
 const hexColors = computed(() => colors.value.map(color => rgbToHex(...color)))
+const alertMessage = ref('Copied to clipboard!')
 
 onMounted(() => {
   onGenerate()
@@ -25,6 +26,7 @@ watchEffect(() => {
   })
   document.addEventListener('keydown', (e) => {
     if (e.code === 'KeyC') {
+      alertMessage.value = 'Complete pallete copied to clipboard!'
       navigator.clipboard.writeText(hexColors.value.join(' '))
       alertUser()
     }
@@ -49,9 +51,10 @@ const rgbToHex = (r, g, b) => {
   return "#" + "0".repeat(6 - hex.length) + hex;
 }
 
-const alertUser = () => {
+const alertUser = (color) => {
   isAlert.value = true
-
+  alertMessage.value = `Color ${hexColors.value[color].toUpperCase()} copied to clipboard!`
+  navigator.clipboard.writeText(hexColors.value[color].toUpperCase())
   setTimeout(() => {
     isAlert.value = false
   }, 1000)
@@ -63,17 +66,17 @@ const alertUser = () => {
     <Spinner />
   </div>
   <div v-else class="flex flex-col md:gap-x-4 items-center justify-evenly min-h-screen w-screen gap-y-4 p-3">
-    <Alert v-if="isAlert" />
+    <Alert v-if="isAlert" :message="alertMessage"/>
     <h1 class="cursor-default font-bold text-3xl md:text-5xl">Color Pallete Generator</h1>
     <div class="flex flex-col justify-center items-center gap-y-4 md:flex-row md:gap-x-3">
       <div class="flex gap-x-3">
-        <ColorCard @alert-event="alertUser" :color="hexColors[0].toUpperCase()" />
-        <ColorCard @alert-event="alertUser" :color="hexColors[1].toUpperCase()" />
-        <ColorCard @alert-event="alertUser" :color="hexColors[2].toUpperCase()" />
+        <ColorCard @alert-event="alertUser(0)" :color="hexColors[0].toUpperCase()" />
+        <ColorCard @alert-event="alertUser(1)" :color="hexColors[1].toUpperCase()" />
+        <ColorCard @alert-event="alertUser(2)" :color="hexColors[2].toUpperCase()" />
       </div>
       <div class="flex gap-x-3">
-        <ColorCard @alert-event="alertUser" :color="hexColors[3].toUpperCase()" />
-        <ColorCard @alert-event="alertUser" :color="hexColors[4].toUpperCase()" />
+        <ColorCard @alert-event="alertUser(3)" :color="hexColors[3].toUpperCase()" />
+        <ColorCard @alert-event="alertUser(4)" :color="hexColors[4].toUpperCase()" />
       </div>
     </div>
     <div class="flex flex-col items-center gap-y-3">
