@@ -5,7 +5,7 @@ The Color Palette Generator is a web application that generates a set of five co
 ## Desktop View
 ![Desktop view](images/Desktop.png)
 
-![Desktop view](images/Desktop.mov)
+![Desktop view](images/Desktop.gif)
 
 ## Mobile View
 ![Mobile view](images/Mobile.png)
