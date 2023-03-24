@@ -65,10 +65,10 @@ const alertUser = (color) => {
 </script>
 
 <template>
-  <div v-if="isLoading" class="flex min-h-screen justify-center items-center">
+  <div v-if="isLoading" class="flex absolute inset-0 justify-center items-center">
     <Spinner />
   </div>
-  <div v-else class="flex flex-col md:gap-x-4 items-center justify-evenly min-h-screen w-screen gap-y-4 p-3">
+  <div v-else class="flex flex-col md:gap-x-4 items-center justify-evenly absolute inset-0 w-screen gap-y-4 p-3">
     <Alert v-if="isAlert" :message="alertMessage"/>
     <h1 class="cursor-default font-bold text-3xl md:text-5xl">Color Pallete Generator</h1>
     <div class="flex flex-col justify-center items-center gap-y-4 md:flex-row md:gap-x-3">
